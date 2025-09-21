@@ -1,11 +1,21 @@
 import 'package:evently_c16_online/core/provider/app_provider.dart';
-import 'package:evently_c16_online/core/theme/app_colors.dart';
+import 'package:evently_c16_online/core/routes/route_gen.dart';
 import 'package:evently_c16_online/core/theme/app_theme.dart';
 import 'package:evently_c16_online/modules/splash/pages/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     ChangeNotifierProvider(
       create: (context) => AppProvider(),
@@ -21,11 +31,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var provider = Provider.of<AppProvider>(context);
     return MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ar'),
+      ],
+      locale: Locale(provider.local),
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: provider.themeMode,
-      home: SplashScreen(),
+      onGenerateRoute: RouteGen.onGenerateRoute,
     );
   }
 }
