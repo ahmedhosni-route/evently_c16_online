@@ -44,6 +44,7 @@ dependencies:
   intl: any
   firebase_core:
   firebase_auth:
+  icons_plus:
 
 dev_dependencies:
   flutter_test:

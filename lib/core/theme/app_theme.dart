@@ -5,26 +5,44 @@ import 'app_colors.dart';
 
 abstract class AppTheme {
   static ThemeData lightTheme = ThemeData(
-    appBarTheme: AppBarTheme(
-        centerTitle: true,
-
-      backgroundColor: Colors.transparent,
-      surfaceTintColor: Colors.transparent
-    ),
     fontFamily: GoogleFonts.cairo().fontFamily,
     primaryColor: AppColors.primaryColor,
+
     scaffoldBackgroundColor: AppColors.lightColor,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.primaryColor,
+      type: BottomNavigationBarType.fixed,
+      unselectedItemColor: Colors.white,
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: AppColors.primaryColor,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(360),
+          side: const BorderSide(
+              color: Colors.white,
+              width: 4
+          )
+      ),
+    ),
+    appBarTheme: const AppBarTheme(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent),
+
     inputDecorationTheme: InputDecorationTheme(
+        errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: Colors.red)),
+        focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: Colors.red)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: Color(0xff7B7B7B))
-        ),
+            borderSide: const BorderSide(color: Color(0xff7B7B7B))),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: Color(0xff7B7B7B))
-
-        )
-    ),
+            borderSide: const BorderSide(color: Color(0xff7B7B7B)))),
     textTheme: const TextTheme(
       bodySmall: TextStyle(fontSize: 14, color: Colors.black),
       bodyMedium: TextStyle(fontSize: 16, color: Colors.black),
@@ -39,25 +57,42 @@ abstract class AppTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
-    appBarTheme: AppBarTheme(
-      centerTitle: true,
-        backgroundColor: Colors.transparent,
-        surfaceTintColor: Colors.transparent
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.primaryColor,
+      type: BottomNavigationBarType.fixed,
+      unselectedItemColor: Colors.white,
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: AppColors.primaryColor,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(360),
+          side: const BorderSide(
+              color: Colors.white,
+              width: 4
+          )
+      ),
+    ),
+    appBarTheme: const AppBarTheme(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent),
     fontFamily: GoogleFonts.cairo().fontFamily,
     primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: AppColors.darkColor,
     inputDecorationTheme: InputDecorationTheme(
+        focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: Colors.red)),
+        errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: Colors.red)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide:  BorderSide(color: AppColors.primaryColor)
-        ),
+            borderSide: BorderSide(color: AppColors.primaryColor)),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide:  BorderSide(color: AppColors.primaryColor)
-
-        )
-    ),
+            borderSide: BorderSide(color: AppColors.primaryColor))),
     textTheme: const TextTheme(
       bodySmall: TextStyle(fontSize: 14, color: Colors.white),
       bodyMedium: TextStyle(fontSize: 16, color: Colors.white),

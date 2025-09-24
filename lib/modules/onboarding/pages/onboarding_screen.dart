@@ -3,6 +3,7 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:evently_c16_online/core/provider/app_provider.dart';
 import 'package:evently_c16_online/core/routes/app_route_name.dart';
 import 'package:evently_c16_online/core/widgets/custom_btn.dart';
+import 'package:evently_c16_online/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -89,9 +90,8 @@ class OnboardingScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     AnimatedToggleSwitch<String>.rolling(
-
                       indicatorIconScale: 1.2,
-                      current: provider.local,
+                      current: provider.locale,
                       values: const ["en", "ar"],
                       iconList: [
                         Image.asset("assets/icons/en.png"),
@@ -106,7 +106,6 @@ class OnboardingScreen extends StatelessWidget {
                         borderColor: AppColors.primaryColor,
                       ),
                       textDirection: TextDirection.ltr,
-
                     ),
                   ],
                 ),
@@ -149,7 +148,8 @@ class OnboardingScreen extends StatelessWidget {
               Center(
                   child: CustomBtn(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, RouteName.login);
+                  context.goReplace(RouteName.login);
+                  // Navigator.pushReplacementNamed(context, RouteName.login);
                 },
                 text: "Let’s Start",
                 isLoading: false,

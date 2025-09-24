@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:evently_c16_online/core/routes/app_route_name.dart';
 import 'package:evently_c16_online/core/theme/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,7 +40,11 @@ class SplashScreen extends StatelessWidget {
           const Spacer(),
           FadeInUpBig(
               onFinish: (direction) {
-                Navigator.pushReplacementNamed(context, RouteName.onBoarding);
+                if (FirebaseAuth.instance.currentUser != null) {
+                  Navigator.pushReplacementNamed(context, RouteName.layout);
+                } else {
+                  Navigator.pushReplacementNamed(context, RouteName.onBoarding);
+                }
               },
               delay: const Duration(seconds: 2),
               child: Image.asset("assets/logo/route_logo.png")),
