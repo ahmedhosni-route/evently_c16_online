@@ -1,5 +1,6 @@
 import 'package:evently_c16_online/core/theme/app_colors.dart';
 import 'package:evently_c16_online/modules/layout/manager/layout_provider.dart';
+import 'package:evently_c16_online/modules/layout/services/layout_services.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,9 @@ class LayoutScreen extends StatelessWidget {
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.centerDocked,
               floatingActionButton: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  LayoutServices.addData();
+                },
                 child: const Icon(
                   Icons.add,
                   color: Colors.white,

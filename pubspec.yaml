@@ -45,6 +45,7 @@ dependencies:
   firebase_core:
   firebase_auth:
   icons_plus:
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:
