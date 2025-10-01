@@ -1,28 +1,48 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:evently_c16_online/modules/layout/services/event_model.dart';
+import 'package:evently_c16_online/core/models/event_model.dart';
 
 class LayoutServices {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  static CollectionReference<EventModel> getCollectionRef(){
-    return firestore.collection("events").withConverter(fromFirestore: (snapshot, options) {
-      return EventModel.fromJson(snapshot.data()!);
-    }, toFirestore: (value, options) {
-      return value.toJson();
-    },);
+  static CollectionReference<EventModel> getCollectionRef() {
+    return firestore.collection("events").withConverter(
+      fromFirestore: (snapshot, options) {
+        return EventModel.fromJson(snapshot.data()!);
+      },
+      toFirestore: (value, options) {
+        return value.toJson();
+      },
+    );
   }
 
-  static EventModel model =
-      EventModel(title: "title", image: "image", date: "date", desc: "desc");
-
-  static addData() async {
+  static Future<List<QueryDocumentSnapshot<EventModel>>> getEvents(
+      String id) async {
     var ref = getCollectionRef();
-    ref.doc().set(model);
+    var data = id == "all"
+        ? await ref.get()
+        : await ref.where("categoryId", isEqualTo: id).get();
+    return data.docs;
+  }
+  static Stream<QuerySnapshot<EventModel>> getEventsStream(
+      String id)  {
+    var ref = getCollectionRef();
+    var data = id == "all"
+        ?  ref.snapshots()
+        :  ref.where("categoryId", isEqualTo: id).snapshots();
+    return data;
   }
 
-  static getData() async {
+
+
+  static Future<List<QueryDocumentSnapshot<EventModel>>> getFavorites() async {
     var ref = getCollectionRef();
-    var data = await ref.get();
-    data.docs;
+    var data = await ref.where("isFavorite", isEqualTo:true ).get();
+    return data.docs;
+  }
+
+  static Future<void> toggleFavorite(EventModel event) async {
+    var ref = getCollectionRef();
+    event.isFavorite = !event.isFavorite;
+    ref.doc(event.id).set(event);
   }
 }

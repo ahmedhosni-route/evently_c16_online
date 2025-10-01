@@ -1,10 +1,16 @@
+import 'package:evently_c16_online/core/constant/categorys.dart';
 import 'package:evently_c16_online/core/provider/app_provider.dart';
 import 'package:evently_c16_online/core/theme/app_colors.dart';
 import 'package:evently_c16_online/main.dart';
 import 'package:evently_c16_online/modules/layout/manager/layout_provider.dart';
+import 'package:evently_c16_online/modules/layout/services/layout_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
+import '../widgets/event_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -91,11 +97,84 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         ],
-                      )
+                      ),
+                      DefaultTabController(
+                          length: CategoryData.categoriesWithAll.length,
+                          child: TabBar(
+                              onTap: provider.onTabIndexChange,
+                              dividerColor: Colors.transparent,
+                              indicatorColor: Colors.transparent,
+                              indicatorPadding: const EdgeInsets.all(4),
+                              labelPadding: const EdgeInsets.all(4),
+                              tabAlignment: TabAlignment.start,
+                              labelStyle: theme.textTheme.bodyMedium!
+                                  .copyWith(color: AppColors.primaryColor),
+                              unselectedLabelColor: AppColors.lightColor,
+                              isScrollable: true,
+                              tabs: CategoryData.categoriesWithAll.map(
+                                (e) {
+                                  int index =
+                                      CategoryData.categoriesWithAll.indexOf(e);
+                                  bool isSelected = index == provider.tabIndex;
+                                  return Tab(
+                                    child: Container(
+                                      padding: const EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
+                                        color: isSelected ? Colors.white : null,
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.sports,
+                                            size: 18,
+                                          ),
+                                          const SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(e.name),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ).toList())),
                     ],
                   ),
                 )),
-
+            Expanded(
+              child: StreamBuilder(
+                stream: LayoutServices.getEventsStream(
+                    CategoryData.categoriesWithAll[provider.tabIndex].id),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text(snapshot.error.toString()),
+                    );
+                  } else if (snapshot.hasData) {
+                    var events = snapshot.data?.docs ?? [];
+                    return ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: events?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        var event = events![index].data();
+                        return EventWidget(
+                          event: event,
+                          onTapFav: () {
+                            provider.toggleFavorite(event);
+                          },
+                        );
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+            )
           ],
         );
       },

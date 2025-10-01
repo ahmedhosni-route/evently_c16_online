@@ -1,3 +1,4 @@
+import 'package:evently_c16_online/core/routes/app_route_name.dart';
 import 'package:evently_c16_online/core/theme/app_colors.dart';
 import 'package:evently_c16_online/modules/layout/manager/layout_provider.dart';
 import 'package:evently_c16_online/modules/layout/services/layout_services.dart';
@@ -20,35 +21,35 @@ class LayoutScreen extends StatelessWidget {
                   FloatingActionButtonLocation.centerDocked,
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  LayoutServices.addData();
+                  Navigator.pushNamed(context, RouteName.addEvent);
                 },
                 child: const Icon(
                   Icons.add,
                   color: Colors.white,
                 ),
               ),
-              bottomNavigationBar:
-                  BottomNavigationBar(
-                    onTap: provider.onNavTap,
-                      currentIndex: provider.navIndex,
-                      fixedColor: Colors.white, items: const [
-                BottomNavigationBarItem(
-                    icon: Icon(Iconsax .home_1_outline),
-                    activeIcon: Icon(Iconsax .home_1_bold),
-                    label: "Home"),
-                BottomNavigationBarItem(
-                    icon: Icon(Iconsax.location_outline),
-                    activeIcon: Icon(Iconsax.location_bold),
-                    label: "Map"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.favorite_border_rounded),
-                    activeIcon: Icon(Icons.favorite),
-                    label: "Love"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.person_outline_rounded),
-                    activeIcon: Icon(Icons.person_rounded),
-                    label: "Profile"),
-              ]),
+              bottomNavigationBar: BottomNavigationBar(
+                  onTap: provider.onNavTap,
+                  currentIndex: provider.navIndex,
+                  fixedColor: Colors.white,
+                  items: const [
+                    BottomNavigationBarItem(
+                        icon: Icon(Iconsax.home_1_outline),
+                        activeIcon: Icon(Iconsax.home_1_bold),
+                        label: "Home"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Iconsax.location_outline),
+                        activeIcon: Icon(Iconsax.location_bold),
+                        label: "Map"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.favorite_border_rounded),
+                        activeIcon: Icon(Icons.favorite),
+                        label: "Love"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.person_outline_rounded),
+                        activeIcon: Icon(Icons.person_rounded),
+                        label: "Profile"),
+                  ]),
             );
           },
         ));

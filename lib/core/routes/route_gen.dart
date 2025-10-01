@@ -2,6 +2,7 @@ import 'package:evently_c16_online/core/routes/app_route_name.dart';
 import 'package:evently_c16_online/modules/auth/pages/forget_password_screen.dart';
 import 'package:evently_c16_online/modules/auth/pages/login_screen.dart';
 import 'package:evently_c16_online/modules/auth/pages/register_screen.dart';
+import 'package:evently_c16_online/modules/events/pages/add_event_screen.dart';
 import 'package:evently_c16_online/modules/layout/pages/layout_screen.dart';
 import 'package:evently_c16_online/modules/onboarding/pages/onboarding_screen.dart';
 import 'package:evently_c16_online/modules/splash/pages/splash_screen.dart';
@@ -50,6 +51,13 @@ class RouteGen {
 
           pageBuilder: (context, animation, secondaryAnimation) {
             return LayoutScreen();
+          },
+        );case RouteName.addEvent:
+        return PageRouteBuilder(
+          transitionDuration: Duration(seconds: 1),
+
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return AddEventScreen();
           },
         );
       default:

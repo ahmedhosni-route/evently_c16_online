@@ -25,7 +25,14 @@ abstract class AppTheme {
           )
       ),
     ),
-    appBarTheme: const AppBarTheme(
+    appBarTheme:  AppBarTheme(
+      titleTextStyle: TextStyle(
+        color: AppColors.primaryColor,
+        fontSize: 20
+      ),
+        iconTheme: IconThemeData(
+          color: AppColors.primaryColor
+        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent),
@@ -73,7 +80,15 @@ abstract class AppTheme {
           )
       ),
     ),
-    appBarTheme: const AppBarTheme(
+    appBarTheme:  AppBarTheme(
+        titleTextStyle: TextStyle(
+          color: AppColors.primaryColor,
+            fontSize: 20
+
+        ),
+        iconTheme: IconThemeData(
+            color: AppColors.primaryColor
+        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent),
