@@ -11,7 +11,7 @@ class AuthServices {
         email: email,
         password: password,
       );
-      await credential.user!.sendEmailVerification();
+      // await credential.user!.sendEmailVerification();
       await credential.user!.updateDisplayName(name);
 
       return credential;

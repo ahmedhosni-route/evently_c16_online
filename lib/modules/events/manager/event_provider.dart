@@ -1,6 +1,7 @@
 import 'package:evently_c16_online/core/constant/categorys.dart';
 import 'package:evently_c16_online/core/models/event_model.dart';
 import 'package:evently_c16_online/modules/events/services/event_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class EventProvider extends ChangeNotifier {
@@ -31,6 +32,7 @@ class EventProvider extends ChangeNotifier {
     notifyListeners();
     var event = EventModel(
         id: "id",
+        userId: FirebaseAuth.instance.currentUser!.uid,
         categoryId: CategoryData.categories[tabIndex].id,
         title: titleController.text,
         image: CategoryData.categories[tabIndex].image,

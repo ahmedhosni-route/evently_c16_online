@@ -12,46 +12,47 @@ class LayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => LayoutProvider(),
-        child: Consumer<LayoutProvider>(
-          builder: (context, provider, child) {
-            return Scaffold(
-              body: provider.screens[provider.navIndex],
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerDocked,
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, RouteName.addEvent);
-                },
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
+      create: (context) => LayoutProvider(),
+      child: Consumer<LayoutProvider>(
+        builder: (context, provider, child) {
+          return Scaffold(
+            body: provider.screens[provider.navIndex],
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(context, RouteName.addEvent);
+              },
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
               ),
-              bottomNavigationBar: BottomNavigationBar(
-                  onTap: provider.onNavTap,
-                  currentIndex: provider.navIndex,
-                  fixedColor: Colors.white,
-                  items: const [
-                    BottomNavigationBarItem(
-                        icon: Icon(Iconsax.home_1_outline),
-                        activeIcon: Icon(Iconsax.home_1_bold),
-                        label: "Home"),
-                    BottomNavigationBarItem(
-                        icon: Icon(Iconsax.location_outline),
-                        activeIcon: Icon(Iconsax.location_bold),
-                        label: "Map"),
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite_border_rounded),
-                        activeIcon: Icon(Icons.favorite),
-                        label: "Love"),
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.person_outline_rounded),
-                        activeIcon: Icon(Icons.person_rounded),
-                        label: "Profile"),
-                  ]),
-            );
-          },
-        ));
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+                onTap: provider.onNavTap,
+                currentIndex: provider.navIndex,
+                fixedColor: Colors.white,
+                items: const [
+                  BottomNavigationBarItem(
+                      icon: Icon(Iconsax.home_1_outline),
+                      activeIcon: Icon(Iconsax.home_1_bold),
+                      label: "Home"),
+                  BottomNavigationBarItem(
+                      icon: Icon(Iconsax.location_outline),
+                      activeIcon: Icon(Iconsax.location_bold),
+                      label: "Map"),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.favorite_border_rounded),
+                      activeIcon: Icon(Icons.favorite),
+                      label: "Love"),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.person_outline_rounded),
+                      activeIcon: Icon(Icons.person_rounded),
+                      label: "Profile"),
+                ]),
+          );
+        },
+      ),
+    );
   }
 }

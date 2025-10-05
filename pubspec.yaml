@@ -46,7 +46,8 @@ dependencies:
   firebase_auth:
   icons_plus:
   cloud_firestore:
-
+  shared_preferences:
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter

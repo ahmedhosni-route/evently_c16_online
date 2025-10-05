@@ -1,5 +1,6 @@
 import 'package:evently_c16_online/core/provider/app_provider.dart';
 import 'package:evently_c16_online/core/routes/route_gen.dart';
+import 'package:evently_c16_online/core/servces/shared_servces.dart';
 import 'package:evently_c16_online/core/theme/app_theme.dart';
 import 'package:evently_c16_online/modules/splash/pages/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +12,7 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SharedService.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

@@ -7,7 +7,9 @@ import 'package:evently_c16_online/modules/layout/services/layout_services.dart'
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+
 class LayoutProvider extends ChangeNotifier {
+
   List<Widget> screens = [
     HomeScreen(),
     MapScreen(),

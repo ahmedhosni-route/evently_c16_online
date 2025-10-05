@@ -38,8 +38,8 @@ class AuthProvider extends ChangeNotifier {
       try {
         var user = await AuthServices.login(
             email: emailController.text, password: passwordController.text);
-        if (user!.user!.emailVerified) {
-          AppDialogs.showMessage(context, "Welcome  ${user.user!.displayName}");
+        if (true) {
+          AppDialogs.showMessage(context, "Welcome  ${user!.user!.displayName}");
           Navigator.pushReplacementNamed(context, RouteName.layout);
         } else {
           AppDialogs.showMessage(
